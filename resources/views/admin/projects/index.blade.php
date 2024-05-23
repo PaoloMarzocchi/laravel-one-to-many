@@ -19,6 +19,7 @@
                         <tr>
                             <th scope="col">Preview</th>
                             <th scope="col">Title</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Project link</th>
                             <th scope="col">Repository link</th>
                             <th scope="col">Start date</th>
@@ -41,6 +42,7 @@
 
                                 </td>
                                 <td>{{ $project->title }}</td>
+                                <td>{{ $project->type ? $project->type->name : '' }}</td>
                                 <td><a href="{{ $project->project_url }}">Go to Project</a></td>
                                 <td>
                                     <a href="{{ $project->repo_url }}">Check project code</a>
@@ -102,7 +104,7 @@
                             </tr>
                         @empty
                             <tr class="">
-                                <td scope="row" colspan="6">Nothing Found</td>
+                                <td scope="row" colspan="8">Nothing Found</td>
                             </tr>
                         @endforelse
 
