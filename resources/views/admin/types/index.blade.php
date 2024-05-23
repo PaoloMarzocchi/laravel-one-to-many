@@ -6,7 +6,7 @@
             <h2 class="title_section">Projects for each type</h2>
 
             <div class="d-flex justify-content-end pb-2">
-                <a class="btn my_success" href="{{ route('admin.projects.create') }}">Add new
+                <a class="btn my_success" href="{{ route('admin.types.create') }}">Add new
                     Type</a>
             </div>
 
@@ -31,7 +31,7 @@
             @include('partials.confirm-form')
 
 
-            <div class="table-responsive my_table">
+            <div class="table-responsive my_table mb-2">
                 <table class="table mb-0 table-striped">
                     <thead>
                         <tr>
@@ -51,9 +51,10 @@
                                 <td scope="row">
 
                                     @if (Str::startsWith($project->preview, 'https://'))
-                                        <img width="200" src="{{ $project->preview }}" alt="{{ $project->title }}">
+                                        <img width="200" loading="lazy" src="{{ $project->preview }}"
+                                            alt="{{ $project->title }}">
                                     @else
-                                        <img width="200" src="{{ asset('storage/' . $project->preview) }}"
+                                        <img width="200" loading="lazy" src="{{ asset('storage/' . $project->preview) }}"
                                             alt="{{ $project->title }}">
                                     @endif
 
@@ -129,6 +130,8 @@
                     </tbody>
                 </table>
             </div>
+
+            {{ $projects->links('pagination::bootstrap-5') }}
 
         </div>
     </section>

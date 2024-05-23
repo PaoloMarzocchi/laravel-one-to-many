@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -19,9 +20,9 @@ class TypeController extends Controller
         //dd($request);
 
         if ($request->id == 0) {
-            $projects = Project::all();
+            $projects = Project::orderByDesc('id')->paginate(5);
         } elseif ($request->has('id')) {
-            $projects = Project::where('type_id', $request->id)->get();
+            $projects = Project::orderByDesc('id')->where('type_id', $request->id)->paginate(5);
         }
         $types = Type::all();
 
@@ -33,7 +34,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -41,7 +42,14 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        //
+        $val_data = $request->validated();
+
+        $slug = Str::slug($request->name, '-');
+        $val_data['slug'] = $slug;
+
+        $type = Type::create($val_data);
+
+        return to_route('admin.types.index')->with('message', "Project '$type->title' created successfully!");
     }
 
     /**
