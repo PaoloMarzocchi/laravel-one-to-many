@@ -1,19 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Type;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
+use App\Models\Project;
+use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //dd($request);
+
+        if ($request->id == 0) {
+            $projects = Project::all();
+        } elseif ($request->has('id')) {
+            $projects = Project::where('type_id', $request->id)->get();
+        }
+        $types = Type::all();
+
+        return view('admin.types.index', compact('projects', 'types'));
     }
 
     /**
