@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -32,6 +35,8 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        //dd($request->all());
+
         $validated = $request->validated();
 
         $slug = Str::slug($request->title, '-');
@@ -40,10 +45,12 @@ class ProjectController extends Controller
 
         //dd($validated);
 
+        if ($request->has('preview')) {
+            $preview_path = Storage::put('previews', $validated['preview']);
 
-        $preview_path = Storage::put('previews', $validated['preview']);
+            $validated['preview'] = $preview_path;
+        }
 
-        $validated['preview'] = $preview_path;
 
         //dd($validated);
 

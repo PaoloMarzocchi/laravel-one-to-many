@@ -27,6 +27,10 @@
                             <p>{{ $project->description }}</p>
                         </li>
                         <li>
+                            <strong>Type: </strong><br>
+                            {{ $project->type ? $project->type->name : 'No type' }}
+                        </li>
+                        <li>
                             <strong>Project link: </strong><br>
                             <a href="{{ $project->repo_link }}">Go to project</a>
                         </li>
