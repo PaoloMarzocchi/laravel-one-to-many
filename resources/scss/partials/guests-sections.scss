@@ -1,0 +1,12 @@
+@use './variables' as *;
+
+.guest_section {
+    background-image: url('../img/bg-guests.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+
+    .jumbotron {
+        color: $lightest;
+    }
+}
