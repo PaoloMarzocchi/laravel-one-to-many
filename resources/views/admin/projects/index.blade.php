@@ -13,7 +13,7 @@
             @include('partials.confirm-form')
 
 
-            <div class="table-responsive my_table">
+            <div class="table-responsive my_table mb-2">
                 <table class="table mb-0 table-striped">
                     <thead>
                         <tr>
@@ -34,9 +34,10 @@
                                 <td scope="row">
 
                                     @if (Str::startsWith($project->preview, 'https://'))
-                                        <img width="200" src="{{ $project->preview }}" alt="{{ $project->title }}">
+                                        <img width="200" loading="lazy" src="{{ $project->preview }}"
+                                            alt="{{ $project->title }}">
                                     @else
-                                        <img width="200" src="{{ asset('storage/' . $project->preview) }}"
+                                        <img width="200" loading="lazy" src="{{ asset('storage/' . $project->preview) }}"
                                             alt="{{ $project->title }}">
                                     @endif
 
@@ -113,7 +114,7 @@
                     </tbody>
                 </table>
             </div>
-
+            {{ $projects->links('pagination::bootstrap-5') }}
         </div>
     </section>
 @endsection
