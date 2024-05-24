@@ -15,19 +15,27 @@ class TypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, Type $type)
     {
-        //dd($request);
-
-        /* if ($request->id == 0) {
-            $projects = Project::orderByDesc('id')->paginate(5);
-        } elseif ($request->has('id')) {
-            $projects = Project::orderByDesc('id')->where('type_id', $request->id)->paginate(5);
-        } */
         $types = Type::orderByDesc('id')->paginate(5);
 
         return view('admin.types.index', compact('types'));
     }
+
+    /**
+     * Display a listing of the Projects filtered by the common Type
+     */
+    public function filtered(Type $type)
+    {
+        //dd($type);
+
+        $projects = Project::orderByDesc('id')->where('type_id', $type->id)->paginate(5);
+
+        //dd($projects, $type->id);
+        return view('admin.types.projects-filtered', compact('projects', 'type'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

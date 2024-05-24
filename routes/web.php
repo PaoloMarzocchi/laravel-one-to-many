@@ -35,14 +35,17 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/types/projects-filtered/{type}', [TypeController::class, 'filtered'])->name('filtered');
 
         Route::resource('projects', ProjectController::class)->parameters([
             'projects' => 'project:slug'
         ]);
-
         Route::resource('types', TypeController::class)->parameters([
             'types' => 'type:slug'
         ]);
     });
 
 require __DIR__ . '/auth.php';
+
+/* Route::get('/photos/popular', [PhotoController::class, 'popular']);
+Route::resource('photos', PhotoController::class); */

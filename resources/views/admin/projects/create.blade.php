@@ -5,7 +5,7 @@
         <div class="container">
             <h2 class="title_section">Create a new project</h2>
             <div class="d-flex justify-content-end pb-2">
-                <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Go Back</a>
+                <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Projects list</a>
             </div>
 
             @include('partials.alert-error-form')
