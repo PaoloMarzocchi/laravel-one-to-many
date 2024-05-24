@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 50);
             $table->string('slug', 50);
             $table->string('preview', 255)->nullable();
+            $table->string('video_preview', 255)->nullable();
             $table->string('repo_url', 255)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

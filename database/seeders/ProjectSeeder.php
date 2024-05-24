@@ -21,6 +21,7 @@ class ProjectSeeder extends Seeder
             $project->slug = Str::of($project->title)->slug('-');
             $project->project_url = $faker->url();
             $project->preview = $faker->imageUrl(600, 300, 'jpg');
+            $project->video_preview = $faker->imageUrl(600, 300, 'jpg');
             $project->repo_url = $faker->url();
             $project->start_date = $faker->dateTimeBetween('-5 month', 'now');
             $project->end_date = $faker->dateTimeBetween($project->start_date, 'now');
