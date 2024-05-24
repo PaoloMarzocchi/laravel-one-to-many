@@ -14,7 +14,7 @@
                     I'm Paolo Marzocchi, a Junior Full-Stack Developer eager to build dynamic and responsive web
                     applications.
                 </p>
-                <p class="fs-5 w-50">
+                <p class="fs-5 w-50 text-secondary">
                     Explore my projects to see how I am learning and applying modern technologies to bring ideas to life.
                 </p>
                 <a style="width: fit-content" href="#" class="btn my_danger btn-lg" type="button">See my

@@ -5,3 +5,7 @@
 @use './partials/admin-sections';
 @use './partials/guests-sections';
 @use './partials/site-footer';
+
+body {
+    font-family: "Poppins", sans-serif;
+}
