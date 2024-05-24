@@ -19,14 +19,14 @@ class TypeController extends Controller
     {
         //dd($request);
 
-        if ($request->id == 0) {
+        /* if ($request->id == 0) {
             $projects = Project::orderByDesc('id')->paginate(5);
         } elseif ($request->has('id')) {
             $projects = Project::orderByDesc('id')->where('type_id', $request->id)->paginate(5);
-        }
-        $types = Type::all();
+        } */
+        $types = Type::orderByDesc('id')->paginate(5);
 
-        return view('admin.types.index', compact('projects', 'types'));
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -49,7 +49,7 @@ class TypeController extends Controller
 
         $type = Type::create($val_data);
 
-        return to_route('admin.types.index')->with('message', "Project '$type->title' created successfully!");
+        return to_route('admin.types.index')->with('message', "Type '$type->name' created successfully!");
     }
 
     /**
@@ -57,7 +57,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return view('admin.types.show', compact('type'));
     }
 
     /**
@@ -65,7 +65,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -73,7 +73,14 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $val_data = $request->validated();
+
+        $slug = Str::slug($request->name, '-');
+        $val_data['slug'] = $slug;
+
+        $type->update($val_data);
+
+        return to_route('admin.types.show', compact('type'))->with('message', "Type '$type->name' edited successfully!");
     }
 
     /**
@@ -81,6 +88,8 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        return to_route('admin.types.index')->with('message', "Type '$type->name' deleted successfully!");
     }
 }
